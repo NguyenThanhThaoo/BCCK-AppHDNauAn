@@ -37,14 +37,14 @@ const SignUp = ({ navigation }) => {
     };
     const img = "https://png.pngtree.com/template/20190522/ourmid/pngtree-cooking-logo-design-inspiration-image_202856.jpg"
     return (
-        <View style={{ flex: 1, height: '100%', justifyContent: "center", alignContent: "center", backgroundColor: 'white', marginBottom: 80 }}>
+        <View style={{ flex: 1, height: '100%', justifyContent: "center", alignContent: "center", backgroundColor: 'white', paddingBottom:80 }}>
             <Image
                 style={styles.Logo}
                 source={{
                     uri: img,
                 }}
             />
-            <Text style={{ fontSize: 30, fontWeight: "bold", alignSelf: "center", color: "#FF6666" }}>
+            <Text style={{ fontSize: 30, fontWeight: "bold", alignSelf: "center", color: "#FFB90F" }}>
                 SIGNUP
             </Text>
             <TextInput
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-        backgroundColor: '#FF6666',
+        backgroundColor: '#FFB90F',
     },
     Logo: {
         width: 100,

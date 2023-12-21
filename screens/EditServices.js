@@ -4,12 +4,15 @@ import { TextInput } from 'react-native-paper';
 import { getFirestore, doc, getDoc, updateDoc, collection } from '@react-native-firebase/firestore';
 import { launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
+import { ScrollView } from 'react-native-virtualized-view';
 
 const EditFoods = ({ route, navigation }) => {
   const { itemId } = route.params;
   const [foods, setFoods] = useState({});
   const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
+  // const [price, setPrice] = useState('');
+  const [ingredient, setIngredient] = useState('');
+  const [instruct, setInstruct] = useState('');
   const [imageUri, setImageUri] = useState(null);
 
   useEffect(() => {
@@ -19,7 +22,9 @@ const EditFoods = ({ route, navigation }) => {
       if (docSnap.exists()) {
         setFoods(docSnap.data());
         setName(docSnap.data().name);
-        setPrice(docSnap.data().price.toString());
+        setName(docSnap.data().ingredient);
+        setName(docSnap.data().instruct);
+        // setPrice(docSnap.data().price.toString());
         setImageUri(docSnap.data().imageUrl);
       }
     };
@@ -40,52 +45,103 @@ const EditFoods = ({ route, navigation }) => {
   };
 
   const handleUpdate = async () => {
-    try {
-      const priceValue = parseFloat(price);
-    if (isNaN(priceValue)) {
-      Alert.alert('', 'Invalid number');
+    // try {
+    //   const priceValue = parseFloat(price);
+    // if (isNaN(priceValue)) {
+    //   Alert.alert('', 'Invalid number');
+    //   return;
+    // }
+    // let imageUrl = null;
+    //   if (imageUri) {
+    //     const response = await fetch(imageUri);
+    //     const blob = await response.blob();
+  
+    //     const storageRef = storage().ref(`Images/${foods}-${Date.now()}`);
+    //     await storageRef.put(blob);
+    //     imageUrl = await storageRef.getDownloadURL();
+    //   }
+
+    //   await updateDoc(doc(getFirestore(), 'foods', itemId), {
+    //     name: name,
+    //     ingredient: ingredient,
+    //     instruct: instruct,
+    //     // price: priceValue,
+    //     imageUrl,
+    //   });
+    //   console.log('Dịch vụ đã được cập nhật thành công!');
+    //   navigation.goBack();
+    // } catch (error) {
+    //   console.error('Error adding food:', error);
+    // }
+
+    if (!foods || !ingredient || !instruct) {
+      console.log('Please fill in all fields.');
       return;
     }
+    // const foodsRef = collection(db, 'foods');
     let imageUrl = null;
-      if (imageUri) {
-        const response = await fetch(imageUri);
-        const blob = await response.blob();
-  
-        const storageRef = storage().ref(`Images/${foods}-${Date.now()}`);
-        await storageRef.put(blob);
-        imageUrl = await storageRef.getDownloadURL();
-      }
+    if (imageUri) {
+      const response = await fetch(imageUri);
+      const blob = await response.blob();
 
+      const storageRef = storage().ref(`Images/${foods}-${Date.now()}`);
+      await storageRef.put(blob);
+      imageUrl = await storageRef.getDownloadURL();
+    }
+
+    try {
       await updateDoc(doc(getFirestore(), 'foods', itemId), {
-        name:name,
-        price: priceValue,
+        name: name,
+        ingredient: ingredient,
+        instruct: instruct,
         imageUrl,
       });
-      console.log('Dịch vụ đã được cập nhật thành công!');
+
+       console.log('Dịch vụ đã được cập nhật thành công!');
       navigation.goBack();
     } catch (error) {
-      console.error('Lỗi khi cập nhật dịch vụ:', error);
+      console.error('Error adding food:', error);
     }
+
+
   };
   
 
 
   return (
     <View style={{ backgroundColor: '#fff' }}>
-     
-      <TextInput
+     <ScrollView>
+     <TextInput
         style={{ margin: 10, borderRadius: 10 }}
-        placeholder="Service Name"
+        placeholder="Nhập tên món ăn"
         value={name}
         onChangeText={(text) => setName(text)}
         underlineColor='transparent'
       />
-      <TextInput
+      {/* <TextInput
         style={{ margin: 10, borderRadius: 10 }}
         placeholder="Price"
         value={price}
         onChangeText={(text) => setPrice(text)}
         underlineColor='transparent'
+      /> */}
+      <TextInput
+        style={{ margin: 10, borderRadius: 10 }}
+        placeholder="Nhập nguyên liệu"
+        value={ingredient}
+        onChangeText={(text) => setIngredient(text)}
+        underlineColor='transparent'
+        multiline={true}
+        numberOfLines={10}
+      />
+      <TextInput
+        style={{ margin: 10, borderRadius: 10 }}
+        placeholder="Nhập hướng dẫn thực hện"
+        value={instruct}
+        onChangeText={(text) => setInstruct(text)}
+        underlineColor='transparent'
+        multiline={true}
+        numberOfLines={10}
       />
        <Pressable onPress={pickImage} style={{ margin: 10 }}>
         <Text style={{ color: 'blue' }}>Select Image</Text>
@@ -110,6 +166,8 @@ const EditFoods = ({ route, navigation }) => {
           <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>Update</Text>
         </Pressable>
       </View>
+     </ScrollView>
+      
 
     </View>
   );

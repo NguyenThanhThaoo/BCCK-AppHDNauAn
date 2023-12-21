@@ -12,12 +12,12 @@ import { ScrollView } from 'react-native-virtualized-view';
 import { MyContextControllerProvider, useMyContextController, MyContext } from '../context';
 import auth from '@react-native-firebase/auth';
 
-const Foods = ({ navigation }) => {
+const Drinks = ({ navigation }) => {
     const currentUser = auth().currentUser
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState(null);
-    const [foods, setFoods] = useState([]);
-    const [foodsList, setfilterFoods] = useState([]);
+    const [drinks, setDrinks] = useState([]);
+    const [drinksList, setfilterDrinks] = useState([]);
     const { login } = useMyContextController();
     const [showLike, setShowLike] = useState(false);
     const toggleShowLike = () => {
@@ -40,15 +40,15 @@ const Foods = ({ navigation }) => {
     useEffect(() => {
         Icon.loadFont();
 
-        const foodsRef = collection(db, 'foods');
+        const drinksRef = collection(db, 'drinks');
 
-        const unsubscribe = onSnapshot(query(foodsRef), (querySnapshot) => {
+        const unsubscribe = onSnapshot(query(drinksRef), (querySnapshot) => {
             // const servicesList = [];
             // querySnapshot.forEach((doc) => {
             //     servicesList.push({ ...doc.data(), id: doc.id });
             // });
             // setServices(servicesList);
-            const foodsList = [];
+            const drinksList = [];
             // querySnapshot.forEach((doc) => {
             //     const serviceData = { ...doc.data(), id: doc.id };
             //     servicesList.push(serviceData);
@@ -57,33 +57,32 @@ const Foods = ({ navigation }) => {
             if (querySnapshot) {
                 querySnapshot.forEach((doc) => {
                     if (doc && doc.data()) {
-                        const foodsData = { ...doc.data(), id: doc.id };
-                        foodsList.push(foodsData);
+                        const drinksData = { ...doc.data(), id: doc.id };
+                        drinksList.push(drinksData);
                     }
                 });
             }
 
-            setFoods(foodsList);
-            setfilterFoods(foodsList);
+            setDrinks(drinksList);
+            setfilterDrinks(drinksList);
         });
         return () => unsubscribe();
     }, [db]);
 
 
     const handleSearch = (query) => {
-        const filterData = foods.filter((food) =>
-            food.name.toLowerCase().includes(query.toLowerCase())
+        const filterData = drinks.filter((drink) =>
+            drink.name.toLowerCase().includes(query.toLowerCase())
         );
-        setfilterFoods(filterData);
+        setfilterDrinks(filterData);
     };
-    const handleDetails = (foods) => {
+    const handleDetails = (drinks) => {
         navigation.navigate('FoodsDetail', {
-            name: foods.name,
-            ingredient: foods.ingredient,
-            instruct: foods.instruct,
-            imageUrl: foods.imageUrl,
-          
-        },{ foods });
+            name: drinks.name,
+            ingredient: drinks.ingredient,
+            instruct: drinks.instruct,
+            imageUrl: drinks.imageUrl
+        });
     };
 
     const handleDelete = (itemId) => {
@@ -100,7 +99,7 @@ const Foods = ({ navigation }) => {
                     text: 'Xoá',
                     onPress: async () => {
                         try {
-                            await db.collection('foods').doc(itemId).delete();
+                            await db.collection('drinks').doc(itemId).delete();
                             Alert.alert("Thông báo !", "Món đã được xóa thành công!")
 
                         } catch (error) {
@@ -135,7 +134,7 @@ const Foods = ({ navigation }) => {
             </View>
             <View style={styles.container}>
                 <View>
-                    <Text style={{ fontWeight: '900', color: '#FF6666' }}>MÓN NGON MỖI NGÀY</Text>
+                    <Text style={{ fontWeight: '900', color: '#ECAB53' }}>Đồ Uống Ngon Mỗi Ngày</Text>
                 </View>
                 {user && user.email === 'ntthao6722@gmail.com' ? (<TouchableOpacity onPress={() => navigation.navigate('AddFoods')}>
                     <Text>
@@ -147,7 +146,7 @@ const Foods = ({ navigation }) => {
             <ScrollView>
                 <FlatList
                     style={{ marginBottom: 150 }}
-                    data={foodsList}
+                    data={drinksList}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <View style={{ flexDirection: 'row', margin: 5 }}>
@@ -220,6 +219,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     }
 });
-export default Foods;
+export default Drinks;
 
 

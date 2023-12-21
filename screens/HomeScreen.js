@@ -11,6 +11,8 @@ import Services from './Services';
 import AddServices from '../AddService';
 import Logout from './Logout';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Drinks from './Drinks';
+
 
 
 
@@ -18,7 +20,7 @@ const Tab = createBottomTabNavigator();
 
 
 const getTabBarIcon = icon => ({ tintColor }) => (
-  <Icon name={icon} size={26} style={{ color: "#FF6699" }} />
+  <Icon name={icon} size={26} style={{ color: "#FFB90F" }} />
 );
 
 const Tabs = () => {
@@ -26,10 +28,10 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       initialRouteName='Services'
-      barStyle={{ backgroundColor: "#FF6699" }}
+      barStyle={{ backgroundColor: "#FFB90F" }}
       labeled={false}
-      activeTintColor={{ color: "#FF6699" }}
-      inactiveColor={{ color: "#FF6699" }}
+      activeTintColor={{ color: "#FFB90F" }}
+      inactiveColor={{ color: "#FFB90F" }}
     >
       <Tab.Screen
         name="Món ăn"
@@ -40,7 +42,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Đồ uống"
-        component={Logout}
+        component={Drinks}
         options={{
           tabBarIcon: getTabBarIcon('local-cafe'),
         }}

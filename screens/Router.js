@@ -5,14 +5,14 @@ import { useMyContextController } from "../context";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "../screens/LoginScreen";
 import HomeScreen from "./HomeScreen";
-import ServiceDetail from "../screens/ServiceDetail";
-import Services from "./Services";
 import firestore from '@react-native-firebase/firestore';
-import AddServices from "../AddService";
-import EditServices from "../screens/EditServices";
+import AddFoods from "../AddService";
+import EditFoods from "../screens/EditServices";
 import Tabs from "./HomeScreen";
 import Logout from "../screens/Logout";
 import SignUp from "./SignUp";
+import Foods from "./Services";
+import FoodsDetail from "../screens/ServiceDetail";
 
 
 const Stack = createStackNavigator();
@@ -25,10 +25,10 @@ const Router = () => {
         <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}  />
             <Stack.Screen name="Home" component={HomeScreen}options={{ headerShown: false }}  />
-            <Stack.Screen name="Services" component={Services}options={{ headerShown: false }}  />
-            <Stack.Screen name="AddServices" component={AddServices} />
-            <Stack.Screen name="ServiceDetail" component={ServiceDetail} />
-            <Stack.Screen name="EditServices" component={EditServices} />
+            <Stack.Screen name="Foods" component={Foods}options={{ headerShown: false }}  />
+            <Stack.Screen name="AddFoods" component={AddFoods} />
+            <Stack.Screen name="FoodsDetail" component={FoodsDetail} />
+            <Stack.Screen name="EditFoods" component={EditFoods} />
             <Stack.Screen name="Logout" component={Logout} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
         </Stack.Navigator>

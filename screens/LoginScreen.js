@@ -23,6 +23,8 @@ const LoginScreen = ({ navigation }) => {
   // console.log("sfs",userLogin)
   const onSubmit = () => {
     login(dispatch, email, password);
+    setEmail("");
+    setPassword("");
     navigation.navigate("Home");
 
   }
@@ -37,7 +39,7 @@ const LoginScreen = ({ navigation }) => {
           uri: img,
         }}
       />
-      <Text style={{ fontSize: 30, fontWeight: "bold", alignSelf: "center", color: "#FF6666" }}>
+      <Text style={{ fontSize: 30, fontWeight: "bold", alignSelf: "center", color: "#43d854" }}>
         LOGIN
       </Text>
       <TextInput
@@ -76,7 +78,7 @@ const LoginScreen = ({ navigation }) => {
           flex: 1,
 
         }}>
-          <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'red' }}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#43d854' }}>
             Đăng ký tài khoản
           </Text>
         </Pressable>
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    backgroundColor: '#FF6666',
+    backgroundColor: '#00AA00',
   },
   Logo: {
     width: 100,
