@@ -10,30 +10,25 @@ const FoodsDetail = ({ route }) => {
     const [initializing, setInitializing] = useState(true);
     const { name, ingredient, instruct, imageUrl, foods } = route.params;
     const [status, setStatus] = useState();
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       const docRef = doc(getFirestore(), 'foods', foods);
-    //       const docSnap = await getDoc(docRef);
-    //       if (docSnap.exists()) {
-    //         setStatus(docSnap.data().status);
-    //       }
-    //     };
-    //     fetchData();
-    //   }, [foods]);
     const HandleLike = async () => {
         try {
-            await updateDoc(doc(getFirestore(), 'foods', foods), {
-              status:'like'
-                
-            
-            });
-        } catch (error) {
-            console.error('Error updating food status:', error);
-        }
+            const user = auth().currentUser;
+            if (user) {
+              const userEmail = user.email;
+              const favoritesRef = firestore().collection('favorites');
+              await favoritesRef.add({
+                userEmail: userEmail,
+                name: name,
+                imageUrl:imageUrl,
+                ingredient:ingredient,
+                instruct:instruct
+              });
+              Alert.alert("Thông báo!","Đã thêm vào yêu thích!")
+            } else {
+            }
+          } catch (error) {
+          }
     }
-     
-  
-
     const [user, setUser] = useState(null);
     const onAuthStateChanged = user => {
         setUser(user);

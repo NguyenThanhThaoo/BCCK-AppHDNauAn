@@ -14,20 +14,17 @@ const LoginScreen = ({ navigation }) => {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  // const { userLogin } = controller;
-  // useEffect (() => {
-  //   if(userLogin != null)
-  //       navigation.navigate("Home")
-
-  // }, [userLogin])
-  // console.log("sfs",userLogin)
-  const onSubmit = () => {
-    login(dispatch, email, password);
-    setEmail("");
-    setPassword("");
-    navigation.navigate("Home");
-
-  }
+ 
+  const onSubmit = async () => {
+    try {
+      await login(dispatch, email, password);    
+      setEmail("");
+      setPassword("");
+      navigation.navigate("Home");
+    } catch (error) {
+     Alert.alert("Thông báo","Sai thông tin đăng nhập!")
+    }
+  };
 
   const img = "https://png.pngtree.com/template/20190522/ourmid/pngtree-cooking-logo-design-inspiration-image_202856.jpg"
   return (

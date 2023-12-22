@@ -14,6 +14,7 @@ import SignUp from "./SignUp";
 import Foods from "./Services";
 import FoodsDetail from "../screens/ServiceDetail";
 import Reset from "./ResetPassword";
+import LikeFoods from "./LikeFoods";
 
 
 const Stack = createStackNavigator();
@@ -33,6 +34,7 @@ const Router = () => {
             <Stack.Screen name="Logout" component={Logout} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
             <Stack.Screen name="Reset" component={Reset} options={{ headerShown: false }} />
+            <Stack.Screen name="LikeFoods" component={LikeFoods} options={{ headerShown: false }} />
         </Stack.Navigator>
 
     );

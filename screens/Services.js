@@ -43,17 +43,7 @@ const Foods = ({ navigation }) => {
         const foodsRef = collection(db, 'foods');
 
         const unsubscribe = onSnapshot(query(foodsRef), (querySnapshot) => {
-            // const servicesList = [];
-            // querySnapshot.forEach((doc) => {
-            //     servicesList.push({ ...doc.data(), id: doc.id });
-            // });
-            // setServices(servicesList);
             const foodsList = [];
-            // querySnapshot.forEach((doc) => {
-            //     const serviceData = { ...doc.data(), id: doc.id };
-            //     servicesList.push(serviceData);
-            // });
-            // setServices(servicesList);
             if (querySnapshot) {
                 querySnapshot.forEach((doc) => {
                     if (doc && doc.data()) {
@@ -112,11 +102,9 @@ const Foods = ({ navigation }) => {
             { cancelable: false }
         );
     };
-    const handleEdit = (itemId) => {
-        navigation.navigate('EditFoods', { itemId });
+    const handleEdit = (itemId, category ) => {
+        navigation.navigate('EditFoods', { itemId, category });
     };
-
-    
     return (
         <View style={{ backgroundColor: '#fff' }}>
             <View style={{ width: "95%", alignItems: 'center', alignSelf: 'center', margin: 10 }}>
@@ -135,7 +123,7 @@ const Foods = ({ navigation }) => {
             </View>
             <View style={styles.container}>
                 <View>
-                    <Text style={{ fontWeight: '900', color: '#FF6666' }}>MÓN NGON MỖI NGÀY</Text>
+                    <Text style={{ fontWeight: 'bold', color: '#FF6666', fontSize: 22 }}>Hôm Nay Bạn Ăn Gì?</Text>
                 </View>
                 {user && user.email === 'ntthao6722@gmail.com' ? (<TouchableOpacity onPress={() => navigation.navigate('AddFoods')}>
                     <Text>
@@ -183,15 +171,7 @@ const Foods = ({ navigation }) => {
                                                     onPress={() => handleDelete(item.id)}>
                                                     <Icon name="delete" size={24} color="#fff" />
                                                 </TouchableOpacity>
-                                            </View>
-                                        ) : (<View style={{ justifyContent: 'center' }}>
-                                        <TouchableOpacity
-                                            style={{ padding: 5, backgroundColor: '#fff', borderRadius: 100, margin: 5 }}
-                                            onPress={() => toggleShowLike(item.id)}>
-                                            {/* <IconMT name="heart-outline" size={25} color="red" /> */}
-                                            <IconMT name={showLike ? 'heart' : 'heart-outline' } size={25} color="red" />
-                                        </TouchableOpacity>
-                                        </View>)}
+                                            </View>):null}
                                     </View>
                                 </TouchableOpacity>
                             </View>

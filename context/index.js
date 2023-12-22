@@ -1,12 +1,15 @@
 import { createContext, useContext, useReducer, useMemo , useState} from "react";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
+import { Formik } from 'formik';
+import * as yup from 'yup';
 // import PropTypes from "prop-types";
 // Create MyContext
 export const MyContext = createContext();
 // Setting custom name for the context 
 MyContext.displayName = "MyContextContext";
 // React reducer
+
 function reducer(state, action) {
     switch (action.type) {
         case "USER_LOGIN": {
@@ -51,27 +54,22 @@ function useMyContextController() {
 
 const USERS = firestore().collection("USERS")
 const login = async (dispatch, email, password) => {
-
-    // auth().signInWithEmailAndPassword(email,password)
-    //     .then(
-    //         () =>
-    //             USERS.doc(email)
-    //                 .onSnapshot(u => {
-    //                     const value = u.data();
-    //                     console.log("Đăng Nhập Thành Công voi user : ", value);
-    //                     dispatch({ type: "USER_LOGIN", value });
-    //                 })
-    //     )
-    //     .catch(e => alert("Sai user hoac password") )
-    auth().signInWithEmailAndPassword(email, password)
-        .then(() => USERS.doc(email).onSnapshot(u => {
-            const value = u && u.exists ? u.data() : null;
-            console.log("Đăng Nhập Thành Công Với User : ", value);
-            dispatch({ type: "USER_LOGIN", value });
-        }))
-        .catch(e => alert("Sai user hoặc password"));
-
-}
+    try {
+      const userCredential = await auth().signInWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+      const userDoc = await USERS.doc(email).get();
+  
+      if (userDoc.exists) {
+        const userData = userDoc.data();
+        console.log("Đăng Nhập Thành Công với user:", userData);
+        dispatch({ type: "USER_LOGIN", value: userData });
+      } else {  
+      }
+    } catch (error) {
+  
+      throw error;
+    }
+  };
 
 export {
     MyContextControllerProvider,

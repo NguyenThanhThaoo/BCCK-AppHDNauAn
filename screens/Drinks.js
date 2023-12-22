@@ -111,8 +111,8 @@ const Drinks = ({ navigation }) => {
             { cancelable: false }
         );
     };
-    const handleEdit = (itemId) => {
-        navigation.navigate('EditFoods', { itemId });
+    const handleEdit = (itemId, category) => {
+        navigation.navigate('EditFoods', { itemId, category });
     };
 
     
@@ -134,7 +134,7 @@ const Drinks = ({ navigation }) => {
             </View>
             <View style={styles.container}>
                 <View>
-                    <Text style={{ fontWeight: '900', color: '#ECAB53' }}>Đồ Uống Ngon Mỗi Ngày</Text>
+                    <Text style={{ fontWeight: 'bold', color: '#FF6666', fontSize: 22 }}>Hôm Nay Bạn Uống Gì?</Text>
                 </View>
                 {user && user.email === 'ntthao6722@gmail.com' ? (<TouchableOpacity onPress={() => navigation.navigate('AddFoods')}>
                     <Text>
@@ -183,14 +183,7 @@ const Drinks = ({ navigation }) => {
                                                     <Icon name="delete" size={24} color="#fff" />
                                                 </TouchableOpacity>
                                             </View>
-                                        ) : (<View style={{ justifyContent: 'center' }}>
-                                        <TouchableOpacity
-                                            style={{ padding: 5, backgroundColor: '#fff', borderRadius: 100, margin: 5 }}
-                                            onPress={() => toggleShowLike(item.id)}>
-                                            {/* <IconMT name="heart-outline" size={25} color="red" /> */}
-                                            <IconMT name={showLike ? 'heart' : 'heart-outline' } size={25} color="red" />
-                                        </TouchableOpacity>
-                                        </View>)}
+                                        ) : null}
                                     </View>
                                 </TouchableOpacity>
                             </View>
