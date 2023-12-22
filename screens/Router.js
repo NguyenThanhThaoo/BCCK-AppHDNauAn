@@ -13,6 +13,7 @@ import Logout from "../screens/Logout";
 import SignUp from "./SignUp";
 import Foods from "./Services";
 import FoodsDetail from "../screens/ServiceDetail";
+import Reset from "./ResetPassword";
 
 
 const Stack = createStackNavigator();
@@ -31,6 +32,7 @@ const Router = () => {
             <Stack.Screen name="EditFoods" component={EditFoods} />
             <Stack.Screen name="Logout" component={Logout} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+            <Stack.Screen name="Reset" component={Reset} options={{ headerShown: false }} />
         </Stack.Navigator>
 
     );

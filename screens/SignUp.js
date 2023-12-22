@@ -79,6 +79,18 @@ const SignUp = ({ navigation }) => {
                     <Text style={{alignSelf: 'center', color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Đăng Ký</Text>
                 </Pressable>
             </View>
+            <Pressable
+                onPress={() => navigation.navigate('Login')}
+                style={{
+                    justifyContent: 'center',
+                    alignItems: 'flex-end',
+                    marginRight: 10,
+                    padding: 10,
+                }}>
+                <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFB90F' }}>
+                    Quay lại đăng nhập
+                </Text>
+            </Pressable>
         </View>
     );
 };

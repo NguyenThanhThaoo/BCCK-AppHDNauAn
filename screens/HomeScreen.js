@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 
 
 const getTabBarIcon = icon => ({ tintColor }) => (
-  <Icon name={icon} size={26} style={{ color: "#FFB90F" }} />
+  <Icon name={icon} size={26} style={{ color: "#FF8C00" }} />
 );
 
 const Tabs = () => {
@@ -28,10 +28,10 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       initialRouteName='Services'
-      barStyle={{ backgroundColor: "#FFB90F" }}
+      barStyle={{ backgroundColor: "#FF8C00" }}
       labeled={false}
-      activeTintColor={{ color: "#FFB90F" }}
-      inactiveColor={{ color: "#FFB90F" }}
+      activeTintColor={{ color: "#FF8C00" }}
+      inactiveColor={{ color: "#FF8C00" }}
     >
       <Tab.Screen
         name="Món ăn"

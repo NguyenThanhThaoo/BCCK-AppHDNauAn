@@ -39,7 +39,7 @@ const LoginScreen = ({ navigation }) => {
           uri: img,
         }}
       />
-      <Text style={{ fontSize: 30, fontWeight: "bold", alignSelf: "center", color: "#43d854" }}>
+      <Text style={{ fontSize: 30, fontWeight: "bold", alignSelf: "center", color: "#FFB90F" }}>
         LOGIN
       </Text>
       <TextInput
@@ -71,26 +71,26 @@ const LoginScreen = ({ navigation }) => {
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 10 }}>
         <Pressable onPress={() => navigation.navigate('SignUp')} style={{
-          justifyContent: 'flex-end',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           padding: 10,
           flexDirection: 'row',
           flex: 1,
 
         }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#43d854' }}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFB90F' }}>
             Đăng ký tài khoản
           </Text>
         </Pressable>
-        {/* <Pressable onPress={() => navigation.navigate('Reset')} style={{
-          justifyContent: 'center',
+        <Pressable onPress={() => navigation.navigate('Reset')} style={{
+          justifyContent: 'flex-end',
           alignItems: 'center',
           padding: 10,
         }}>
-          <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#333' }}>
+          <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFB90F' }}>
             Quên mật khẩu ?
           </Text>
-        </Pressable> */}
+        </Pressable>
       </View>
     </View>
   );
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    backgroundColor: '#00AA00',
+    backgroundColor: '#FFB90F',
   },
   Logo: {
     width: 100,
